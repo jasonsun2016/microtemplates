@@ -66,7 +66,10 @@ def resolve(name, context):
         name = name[2:]
     try:
         for tok in name.split('.'):
-            context = context[tok]
+            if tok in context:
+                context = context[tok]
+            else:
+                return None
         return context
     except KeyError:
         raise TemplateContextError(name)
