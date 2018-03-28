@@ -68,6 +68,10 @@ class IfTests(unittest.TestCase):
         self.assertEquals(rendered, '')
         rendered = Template('{% if items %}we have items{% end %}').render(items=[1])
         self.assertEquals(rendered, 'we have items')
+        
+    def test_some_field_does_not_exist(self):
+        rendered = Template('{% if context.has_flag %}we have items{% else %}we have nothing{% end %}').render(context={"items":[1,2]})
+        self.assertEquals(rendered, 'we have nothing')
 
 
 def pow(m=2, e=2):
